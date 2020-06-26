@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17162" systemVersion="20A4299v" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Album" representedClassName="Album" syncable="YES" codeGenerationType="class">
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="year" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="albums" inverseEntity="Artist"/>
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="album" inverseEntity="Track"/>
+    </entity>
+    <entity name="Artist" representedClassName="Artist" syncable="YES" codeGenerationType="class">
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="albums" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Album" inverseName="artist" inverseEntity="Album"/>
+        <relationship name="tracks" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="artist" inverseEntity="Track"/>
+    </entity>
+    <entity name="Container" representedClassName="Container" isAbstract="YES" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="iTunesPersistentID" optional="YES" attributeType="String"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <relationship name="parent" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Folder" inverseName="children" inverseEntity="Folder"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="iTunesPersistentID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Folder" representedClassName="Folder" parentEntity="Container" syncable="YES" codeGenerationType="class">
+        <relationship name="children" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Container" inverseName="parent" inverseEntity="Container"/>
+    </entity>
+    <entity name="Playlist" representedClassName="Playlist" parentEntity="Container" syncable="YES" codeGenerationType="class">
+        <relationship name="playlistTracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaylistTrack" inverseName="playlist" inverseEntity="PlaylistTrack"/>
+    </entity>
+    <entity name="PlaylistTrack" representedClassName="PlaylistTrack" syncable="YES" codeGenerationType="class">
+        <attribute name="order" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="playlist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Playlist" inverseName="playlistTracks" inverseEntity="Playlist"/>
+        <relationship name="track" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Track" inverseName="playlists" inverseEntity="Track"/>
+    </entity>
+    <entity name="Track" representedClassName="Track" syncable="YES" codeGenerationType="class">
+        <attribute name="addedDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="albumTitle" optional="YES" attributeType="String"/>
+        <attribute name="artistName" optional="YES" attributeType="String"/>
+        <attribute name="beatsPerMinute" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="iTunesPersistentID" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="URI"/>
+        <attribute name="title" attributeType="String" defaultValueString=""/>
+        <attribute name="trackNumber" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="album" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Album" inverseName="tracks" inverseEntity="Album"/>
+        <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="tracks" inverseEntity="Artist"/>
+        <relationship name="playlists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PlaylistTrack" inverseName="track" inverseEntity="PlaylistTrack"/>
+        <relationship name="vibes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Vibe" inverseName="tracks" inverseEntity="Vibe"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="iTunesPersistentID"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
+    <entity name="Vibe" representedClassName="Vibe" parentEntity="Container" syncable="YES" codeGenerationType="class">
+        <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="vibes" inverseEntity="Track"/>
+    </entity>
+    <elements>
+        <element name="Album" positionX="-150.3046875" positionY="-471.14453125" width="128" height="89"/>
+        <element name="Artist" positionX="-328.8125" positionY="-380.34375" width="128" height="74"/>
+        <element name="Container" positionX="-456.46484375" positionY="-178.390625" width="128" height="89"/>
+        <element name="Folder" positionX="-243" positionY="-306" width="128" height="44"/>
+        <element name="Playlist" positionX="-248.1796875" positionY="-277.5625" width="128" height="58"/>
+        <element name="PlaylistTrack" positionX="-242.37109375" positionY="-122.4140625" width="128" height="74"/>
+        <element name="Track" positionX="29.76171875" positionY="-346.50390625" width="128" height="224"/>
+        <element name="Vibe" positionX="-295.02734375" positionY="-5.03515625" width="128" height="44"/>
+    </elements>
+</model>
