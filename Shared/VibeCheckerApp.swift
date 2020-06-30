@@ -14,6 +14,12 @@ struct VibeCheckerApp: App {
         WindowGroup {
             ContentView()
                 .environment(\.managedObjectContext, persistentContainer.viewContext)
+                .environment(\.taskContext, {
+                    let taskContext = persistentContainer.newBackgroundContext()
+                    taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+                    taskContext.undoManager = nil
+                    return taskContext
+                }())
         }
     }
     
@@ -45,14 +51,14 @@ struct VibeCheckerApp: App {
     }
     
 }
-//
-//private struct PersistentContainerKey: EnvironmentKey {
-//    static let defaultValue: NSPersistentContainer = NSPersistentContainer(name: "VibeChecker")
-//}
-//
-//extension EnvironmentValues {
-//    var persistentContainer: NSPersistentContainer {
-//        get { self[PersistentContainerKey.self] }
-//        set { self[PersistentContainerKey.self] = newValue }
-//    }
-//}
+
+private struct taskContextKey: EnvironmentKey {
+    static let defaultValue: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+}
+
+extension EnvironmentValues {
+    var taskContext: NSManagedObjectContext {
+        get { self[taskContextKey.self] }
+        set { self[taskContextKey.self] = newValue }
+    }
+}

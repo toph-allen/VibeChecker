@@ -15,6 +15,7 @@ enum ImportViewState {
 
 struct ImportView: View {
     @Environment(\.managedObjectContext) var moc
+    @Environment(\.managedObjectContext) var taskContext
     @Environment(\.presentationMode) var presentationMode
     @State var importViewState = ImportViewState.ready
     @FetchRequest(entity: Container.entity(), sortDescriptors: [], predicate: nil) var containers: FetchedResults<Container>
@@ -36,10 +37,10 @@ struct ImportView: View {
             HStack {
                 Button("Done", action: { presentationMode.wrappedValue.dismiss() })
                 Button("Import", action: {
-//                    let taskContext = persistentContainer.newBackgroundContext()
-//                    taskContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
                     let importer = ITunesImporter(for: moc)
-                    importer.importITunesLibrary()
+                    taskContext.perform {
+                        importer.importITunesLibrary()
+                    }
                 })
 
             }

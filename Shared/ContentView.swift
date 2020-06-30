@@ -11,7 +11,7 @@ import CoreData
 
 struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
-//    @Environment(\.persistentContainer) var persistentContainer
+    @Environment(\.taskContext) var taskContext
 
     @FetchRequest(entity: Container.entity(), sortDescriptors: [], predicate: NSPredicate(format: "parent == nil")) var rootContainers: FetchedResults<Container>
 
@@ -74,6 +74,7 @@ struct ContentView: View {
                     Label("Import Tracks", systemImage: "square.and.arrow.down")
                 }).sheet(isPresented: $presentingImportView) { ImportView()
                     .environment(\.managedObjectContext, self.moc)
+                    .environment(\.taskContext, self.taskContext)
                 }
             }
         }
