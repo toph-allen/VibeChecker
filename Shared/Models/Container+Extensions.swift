@@ -34,8 +34,6 @@ extension Container: Identifiable {
                 for descendant in folder.descendants {
                     if descendant is Vibe {
                         return true
-                    } else {
-                        return false
                     }
                 }
             default:
@@ -54,8 +52,6 @@ extension Container: Identifiable {
                 for descendant in folder.descendants {
                     if descendant is Playlist {
                         return true
-                    } else {
-                        return false
                     }
                 }
             default:

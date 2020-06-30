@@ -1,24 +1,17 @@
 //
-//  VibeCheckerApp.swift
-//  Shared
+//  CoreData.swift
+//  VibeChecker
 //
-//  Created by Toph Allen on 6/25/20.
+//  Created by Toph Allen on 6/30/20.
 //
 
-import SwiftUI
+import Foundation
+import CoreData
+import Combine
 
-@main
-struct VibeCheckerApp: App {
-    
-    var body: some Scene {
-        WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistentContainer.viewContext)
-        }
-    }
-    
+
+class VibeProvider: ObservableObject {
     var persistentContainer: NSPersistentContainer = {
-        print("About to make a new persistent container!")
         let container = NSPersistentContainer(name: "VibeChecker")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
@@ -28,7 +21,6 @@ struct VibeCheckerApp: App {
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
         container.viewContext.automaticallyMergesChangesFromParent = true
         try! container.viewContext.setQueryGenerationFrom(NSQueryGenerationToken.current)
-        print("Made a new persistent container!")
         return container
     }()
     
@@ -43,16 +35,5 @@ struct VibeCheckerApp: App {
             }
         }
     }
-    
 }
-//
-//private struct PersistentContainerKey: EnvironmentKey {
-//    static let defaultValue: NSPersistentContainer = NSPersistentContainer(name: "VibeChecker")
-//}
-//
-//extension EnvironmentValues {
-//    var persistentContainer: NSPersistentContainer {
-//        get { self[PersistentContainerKey.self] }
-//        set { self[PersistentContainerKey.self] = newValue }
-//    }
-//}
+

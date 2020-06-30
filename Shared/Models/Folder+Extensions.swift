@@ -18,6 +18,8 @@ extension Folder {
                 descendants.append(contentsOf: childFolder.descendants)
             }
         }
+        print(String(describing: self.name))
+        print(String(describing: descendants.count))
         return descendants
     }
 }
