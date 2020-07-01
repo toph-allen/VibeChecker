@@ -21,10 +21,15 @@ enum ContainerCreationError: Error {
     case calledOnAbstractParent
 }
 
+enum ImporterState {
+    case ready, importing
+}
 
-class ITunesImporter {
-    var library = ITLibraryInterface()
+
+class ITunesImporter: ObservableObject {
+    lazy var library = ITLibraryInterface()
     var moc: NSManagedObjectContext
+    @Published var state: ImporterState = .ready
     
     init(for moc: NSManagedObjectContext) {
         self.moc = moc
@@ -168,7 +173,7 @@ class ITunesImporter {
     }
     
     
-    func importITunesPlaylists() {
+    private func importITunesPlaylists() {
         for playlist in library.allPlaylists {
             print("About to create the playlist.")
             _ = try! createContainerSubclass(from: playlist, in: moc)
@@ -180,7 +185,7 @@ class ITunesImporter {
     }
     
     
-    func importITunesTracks() {
+    private func importITunesTracks() {
         for track in library.allTracks {
             _ = createTrack(from: track, in: moc)
         }
@@ -189,9 +194,31 @@ class ITunesImporter {
     
     
     func importITunesLibrary() -> Void {
+        state = .importing
         // This should only run if the library's empty. We could also check for existence every time we try to create.
         importITunesTracks()
         importITunesPlaylists()
+        state = .ready
 //        try! moc.save()
+    }
+    
+    func toggleState() -> Void {
+        switch state {
+        case .ready:
+            state = .importing
+        case .importing:
+            state = .ready
+        }
+    }
+    
+    
+    var libraryTrackCount: Int {
+        let count = try? moc.count(for: Track.fetchRequest())
+        return count == nil ? 0 : count!
+    }
+    
+    var libraryContainerCount: Int {
+        let count = try? moc.count(for: Container.fetchRequest())
+        return count == nil ? 0 : count!
     }
 }

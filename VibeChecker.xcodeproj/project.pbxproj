@@ -153,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				6D48060924A54F2400DD8DDF /* Models */,
+				6DCA30F024ACCCE40052129F /* Views */,
 				6D5F46CA24A54E3700411F2D /* VibeCheckerApp.swift */,
 				6D8F491B24ABDD9500312F81 /* CoreData.swift */,
 				6D5F46CB24A54E3700411F2D /* ContentView.swift */,
@@ -208,6 +209,13 @@
 				6D5F46F224A54E3900411F2D /* Info.plist */,
 			);
 			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+		6DCA30F024ACCCE40052129F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

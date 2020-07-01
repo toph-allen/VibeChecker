@@ -8,23 +8,19 @@
 import SwiftUI
 import CoreData
 
-enum ImportViewState {
-    case ready, importing
-}
-
 
 struct ImportView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.managedObjectContext) var taskContext
     @Environment(\.presentationMode) var presentationMode
-    @State var importViewState = ImportViewState.ready
+    @StateObject var importer: ITunesImporter
     @FetchRequest(entity: Container.entity(), sortDescriptors: [], predicate: nil) var containers: FetchedResults<Container>
     @FetchRequest(entity: Track.entity(), sortDescriptors: [], predicate: nil) var tracks: FetchedResults<Track>
-
     
+
     var body: some View {
         VStack(alignment: .leading) {
-            switch importViewState {
+            switch importer.state {
             case .ready:
                 VStack {
                     LibraryStatisticsView(
@@ -41,7 +37,7 @@ struct ImportView: View {
                         let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
                         let batchDeleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
                         do {
-                            _ = try taskContext.execute(batchDeleteRequest)
+                            try moc.executeAndMergeChanges(using: batchDeleteRequest)
                         } catch {
                             fatalError("Failed to perform batch delete: \(error)")
                         }
@@ -50,12 +46,14 @@ struct ImportView: View {
                 Spacer()
                 Button("Cancel", action: { presentationMode.wrappedValue.dismiss() })
                 Button("Import", action: {
-                    let importer = ITunesImporter(for: moc)
-                    importViewState = .importing
                     taskContext.perform {
                         importer.importITunesLibrary()
                     }
-                    importViewState = .ready
+                })
+                Button("Toggle State", action: {
+                    taskContext.perform {
+                        importer.toggleState()
+                    }
                 })
 
             }

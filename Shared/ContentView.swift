@@ -73,7 +73,8 @@ struct ContentView: View {
             ToolbarItem {
                 Button(action: { presentingImportView = true }, label: {
                     Label("Import Tracks", systemImage: "square.and.arrow.down")
-                }).sheet(isPresented: $presentingImportView) { ImportView()
+                }).sheet(isPresented: $presentingImportView) {
+                    ImportView(importer: ITunesImporter(for: taskContext))
                     .environment(\.managedObjectContext, self.moc)
                     .environment(\.taskContext, self.taskContext)
                 }

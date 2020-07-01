@@ -9,8 +9,8 @@ import Foundation
 import CoreData
 import Combine
 
-
 class VibeProvider: ObservableObject {
+    // NOT CURRENTLY IN USE
     var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "VibeChecker")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
@@ -37,3 +37,11 @@ class VibeProvider: ObservableObject {
     }
 }
 
+extension NSManagedObjectContext {
+    public func executeAndMergeChanges(using batchDeleteRequest: NSBatchDeleteRequest) throws {
+        batchDeleteRequest.resultType = .resultTypeObjectIDs
+        let result = try execute(batchDeleteRequest) as? NSBatchDeleteResult
+        let changes: [AnyHashable: Any] = [NSDeletedObjectsKey: result?.result as? [NSManagedObjectID] ?? []]
+        NSManagedObjectContext.mergeChanges(fromRemoteContextSave: changes, into: [self])
+    }
+}
