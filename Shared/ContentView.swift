@@ -24,20 +24,7 @@ struct ContentView: View {
         Group {
             if presentingImportView == false {
                 NavigationView {
-                    List(selection: $selectedContainer) {
-                        Section(header: Text("Vibes")) {
-                            OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { vibe in
-                                ContainerRow(vibe).tag(vibe)
-                            }
-                        }
-                        Section(header: Text("Playlists")) {
-                            OutlineGroup(rootContainers.filter({$0.inVibeTree == false}), children: \.childArray) { vibe in
-                                ContainerRow(vibe).tag(vibe)
-                            }
-                        }
-                    }
-                    .listStyle(SidebarListStyle())
-                    .navigationTitle(selectedContainer != nil ? Text(selectedContainer!.name ?? "") : Text("VibeChecker"))
+                    ContainerList(rootContainers: rootContainers, selectedContainer: $selectedContainer)
                     
                     switch selectedContainer {
                     case let vibe as Vibe:
@@ -85,16 +72,7 @@ struct ContentView: View {
 
 
 
-struct ContainerRow: View {
-    let container: Container
-    init(_ container: Container) {
-        self.container = container
-    }
-    
-    var body: some View {
-        Label(container.name ?? "", systemImage: imageName(for: type(of: container)))
-    }
-}
+
 
 
 struct TrackRow: View {
