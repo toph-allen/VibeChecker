@@ -29,14 +29,21 @@ struct ContainerList: View {
     var body: some View {
 
             List(selection: $selectedContainer) {
+                
+                Label("Library", systemImage: "books.vertical.fill")
+                Label("Songs", systemImage: "music.note")
+                Label("Artists", systemImage: "person.fill")
+                Label("Albums", systemImage: "square.stack")
+                
                 Section(header: Text("Vibes")) {
-                    OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { vibe in
-                        ContainerRow(vibe).tag(vibe)
+                    OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { item in
+                        ContainerRow(item).tag(item)
                     }
                 }
+                
                 Section(header: Text("Playlists")) {
-                    OutlineGroup(rootContainers.filter({$0.inVibeTree == false}), children: \.childArray) { vibe in
-                        ContainerRow(vibe).tag(vibe)
+                    OutlineGroup(rootContainers.filter({$0.inVibeTree == false}), children: \.childArray) { item in
+                        ContainerRow(item).tag(item)
                     }
                 }
             }
