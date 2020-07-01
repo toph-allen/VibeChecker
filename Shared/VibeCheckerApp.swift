@@ -52,13 +52,3 @@ struct VibeCheckerApp: App {
     
 }
 
-private struct taskContextKey: EnvironmentKey {
-    static let defaultValue: NSManagedObjectContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
-}
-
-extension EnvironmentValues {
-    var taskContext: NSManagedObjectContext {
-        get { self[taskContextKey.self] }
-        set { self[taskContextKey.self] = newValue }
-    }
-}

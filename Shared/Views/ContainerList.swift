@@ -7,6 +7,21 @@
 
 import SwiftUI
 
+
+func imageName(for container: Container.Type) -> String {
+    switch container {
+    case is Folder.Type:
+        return "folder"
+    case is Playlist.Type:
+        return "music.note.list"
+    case is Vibe.Type:
+        return "waveform.path.ecg"
+    default:
+        return ""
+    }
+}
+
+
 struct ContainerList: View {
     var rootContainers: FetchedResults<Container>
     @Binding var selectedContainer: Container?

@@ -28,11 +28,7 @@ struct ContentView: View {
                     
                     switch selectedContainer {
                     case let vibe as Vibe:
-                        List(selection: $selectedTrack) {
-                            ForEach(vibe.tracks?.allObjects as! [Track]) { track in
-                                TrackRow(track).tag(track)
-                            }
-                        }
+                        VibeDetail(vibe: vibe)
                     case let playlist as Playlist:
                         List(selection: $selectedTrack) {
                             ForEach(playlist.playlistTracks?.allObjects.map({($0 as! PlaylistTrack).track}) as! [Track]) { track in
@@ -43,13 +39,9 @@ struct ContentView: View {
                         Text("No Vibe Selected")
                             .font(.title)
                             .fontWeight(.light)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(.tertiaryLabel)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
-                    
-                    Text("stuff goes here")
-                        .font(.largeTitle)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             } else {
                 EmptyView()
@@ -71,44 +63,6 @@ struct ContentView: View {
 }
 
 
-
-
-
-
-struct TrackRow: View {
-    let track: Track
-    init(_ track: Track) {
-        self.track = track
-    }
-    
-    var body: some View {
-        VStack(alignment: .leading) {
-            Text(track.title ?? "")
-                .font(.headline)
-                .lineLimit(1)
-            
-            Text(track.artistName ?? "")
-                .font(.subheadline)
-                .lineLimit(1)
-                .foregroundColor(.secondary)
-        }
-        .padding(EdgeInsets(top: 3, leading: 0, bottom: 0, trailing: 0))
-    }
-}
-
-
-func imageName(for container: Container.Type) -> String {
-    switch container {
-    case is Folder.Type:
-        return "folder"
-    case is Playlist.Type:
-        return "music.note.list"
-    case is Vibe.Type:
-        return "waveform.path.ecg"
-    default:
-        return ""
-    }
-}
 
 
 struct ContentView_Previews: PreviewProvider {
