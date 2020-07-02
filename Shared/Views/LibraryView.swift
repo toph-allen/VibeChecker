@@ -11,7 +11,6 @@ struct LibraryView: View {
     @Environment(\.managedObjectContext) var moc
     @Environment(\.managedObjectContext) var taskContext
     @Environment(\.presentationMode) var presentationMode
-    @FetchRequest(entity: Container.entity(), sortDescriptors: [], predicate: nil) var containers: FetchedResults<Container>
     @FetchRequest(entity: Vibe.entity(), sortDescriptors: [], predicate: nil) var vibes: FetchedResults<Vibe>
     @FetchRequest(entity: Playlist.entity(), sortDescriptors: [], predicate: nil) var playlists: FetchedResults<Playlist>
     @FetchRequest(entity: Folder.entity(), sortDescriptors: [], predicate: nil) var folders: FetchedResults<Folder>
@@ -21,12 +20,8 @@ struct LibraryView: View {
     var body: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading) {
-                Text("VibeChecker Library").font(.largeTitle)
-                Text("Containers: \(containers.count)")
-                Text("Vibes: \(vibes.count)")
-                Text("Playlists: \(playlists.count)")
-                Text("Folders: \(folders.count)")
-                Text("Tracks: \(tracks.count)")
+                Text("Your VibeChecker Library").font(.headline)
+                Text("You have \(tracks.count) Track\(tracks.count == 1 ? "" : "s") in your library, across \(vibes.count) Vibe\(vibes.count == 1 ? "" : "s") and \(playlists.count) Playlist\(playlists.count == 1 ? "" : "s"), organized in \(folders.count) Folder\(folders.count == 1 ? "" : "s").")
                 Spacer()
             }
             Spacer()
