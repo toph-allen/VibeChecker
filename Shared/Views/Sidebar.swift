@@ -1,5 +1,5 @@
 //
-//  ContainerList.swift
+//  Sidebar.swift
 //  VibeChecker
 //
 //  Created by Toph Allen on 7/1/20.
@@ -22,15 +22,16 @@ func imageName(for container: Container.Type) -> String {
 }
 
 
-struct ContainerList: View {
+struct Sidebar: View {
     var rootContainers: FetchedResults<Container>
     @Binding var selectedContainer: Container?
     
     var body: some View {
 
             List(selection: $selectedContainer) {
-                
-                Label("Library", systemImage: "books.vertical.fill")
+                NavigationLink(destination: LibraryView()) {
+                    Label("Library", systemImage: "books.vertical.fill")
+                }
                 Label("Songs", systemImage: "music.note")
                 Label("Artists", systemImage: "person.fill")
                 Label("Albums", systemImage: "square.stack")
@@ -55,6 +56,6 @@ struct ContainerList: View {
 
 //struct ContainerList_Previews: PreviewProvider {
 //    static var previews: some View {
-//        ContainerList()
+//        Sidebar()
 //    }
 //}

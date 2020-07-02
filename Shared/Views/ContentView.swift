@@ -24,7 +24,7 @@ struct ContentView: View {
         Group {
             if presentingImportView == false {
                 NavigationView {
-                    ContainerList(rootContainers: rootContainers, selectedContainer: $selectedContainer)
+                    Sidebar(rootContainers: rootContainers, selectedContainer: $selectedContainer)
                     
                     switch selectedContainer {
                     case let vibe as Vibe:
