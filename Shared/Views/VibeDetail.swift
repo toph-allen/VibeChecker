@@ -21,20 +21,9 @@ struct VibeDetail: View {
                     }
                 }
                 if selectedTrack != nil {
-                    VStack(alignment: .leading, spacing: 2) {
-                        Text(selectedTrack!.title ?? "")
-                            .font(.title2)
-                        
-                        Text("Vibes")
-                            .font(.headline)
-                            .padding(.top, 2)
-                        
-                        TagCloudView(tags: selectedTrack!.vibes?.allObjects.map({($0 as! Vibe).name}) as! [String])
-                        
-                        Spacer()
-                    }
-                    .padding()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    // This is actually a track detail view or an inspector
+                    TrackDetail(track: selectedTrack!)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     Text("No Vibe Selected")
                         .font(.title)

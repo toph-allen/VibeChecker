@@ -8,7 +8,8 @@
 import SwiftUI
 
 
-/// From [StackOverflow](https://stackoverflow.com/questions/62102647/swiftui-hstack-with-wrap-and-dynamic-height/62103264#62103264)
+/// From [StackOverflow](https:
+/////stackoverflow.com/questions/62102647/swiftui-hstack-with-wrap-and-dynamic-height/62103264#62103264)
 struct TagCloudView: View {
     var tags: [String]
 

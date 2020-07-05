@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6D0DFF1C24B22D9B0095D095 /* TrackDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0DFF1B24B22D9B0095D095 /* TrackDetail.swift */; };
+		6D0DFF1D24B22E1E0095D095 /* TrackDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0DFF1B24B22D9B0095D095 /* TrackDetail.swift */; };
+		6D0DFF1F24B2303B0095D095 /* VibeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0DFF1E24B2303B0095D095 /* VibeEditView.swift */; };
+		6D0DFF2024B230F60095D095 /* VibeEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D0DFF1E24B2303B0095D095 /* VibeEditView.swift */; };
 		6D10F41124AD14AE00A6A0CA /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D10F41024AD14AE00A6A0CA /* Colors.swift */; };
 		6D324C3D24AE88AC00BA13EF /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D324C3C24AE88AC00BA13EF /* PlaceholderView.swift */; };
 		6D324C3E24AE88AC00BA13EF /* PlaceholderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D324C3C24AE88AC00BA13EF /* PlaceholderView.swift */; };
@@ -75,6 +79,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6D0DFF1B24B22D9B0095D095 /* TrackDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackDetail.swift; sourceTree = "<group>"; };
+		6D0DFF1E24B2303B0095D095 /* VibeEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VibeEditView.swift; sourceTree = "<group>"; };
 		6D10F41024AD14AE00A6A0CA /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		6D324C3C24AE88AC00BA13EF /* PlaceholderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaceholderView.swift; sourceTree = "<group>"; };
 		6D324C3F24AE89B800BA13EF /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
@@ -258,10 +264,12 @@
 				6D324C3F24AE89B800BA13EF /* LibraryView.swift */,
 				6D4E01C624ACE41A008D368B /* ContainerRow.swift */,
 				6D4E01C324ACE1DC008D368B /* VibeDetail.swift */,
+				6D562FBE24AD10ED006943D3 /* PlaylistDetail.swift */,
 				6DC3992424AD16CF00A235B5 /* VibeToken.swift */,
 				6DDA814D24AD1D6F00413E80 /* TagCloudView.swift */,
 				6DC3992124AD167E00A235B5 /* TrackRow.swift */,
-				6D562FBE24AD10ED006943D3 /* PlaylistDetail.swift */,
+				6D0DFF1B24B22D9B0095D095 /* TrackDetail.swift */,
+				6D0DFF1E24B2303B0095D095 /* VibeEditView.swift */,
 				6DAF3AD024AB943700E27DCE /* ImportView.swift */,
 				6D85D68724A59BD20085E1C3 /* ContainerOutline.swift */,
 				6D324C3C24AE88AC00BA13EF /* PlaceholderView.swift */,
@@ -429,7 +437,9 @@
 				6DC3992224AD167E00A235B5 /* TrackRow.swift in Sources */,
 				6D562FBF24AD10ED006943D3 /* PlaylistDetail.swift in Sources */,
 				6D4E01C724ACE41A008D368B /* ContainerRow.swift in Sources */,
+				6D0DFF1C24B22D9B0095D095 /* TrackDetail.swift in Sources */,
 				6D85D68824A59BD20085E1C3 /* ContainerOutline.swift in Sources */,
+				6D0DFF1F24B2303B0095D095 /* VibeEditView.swift in Sources */,
 				6DAF3AD124AB943700E27DCE /* ImportView.swift in Sources */,
 				6DC3992524AD16CF00A235B5 /* VibeToken.swift in Sources */,
 				6DDFFD0224A6745A007073A2 /* Folder+Extensions.swift in Sources */,
@@ -458,6 +468,7 @@
 				6D48060C24A551D300DD8DDF /* ITunesImporter.swift in Sources */,
 				6D562FBD24AD1015006943D3 /* EnvironmentKeys.swift in Sources */,
 				6DC3992624AD16CF00A235B5 /* VibeToken.swift in Sources */,
+				6D0DFF1D24B22E1E0095D095 /* TrackDetail.swift in Sources */,
 				6D5F46F424A54E3900411F2D /* VibeCheckerApp.swift in Sources */,
 				6D4E01C524ACE1DC008D368B /* VibeDetail.swift in Sources */,
 				6D8F491D24ABDD9500312F81 /* CoreData.swift in Sources */,
@@ -477,6 +488,7 @@
 				6D48060824A54EDF00DD8DDF /* VibeChecker.xcdatamodeld in Sources */,
 				6D85D68924A59BD20085E1C3 /* ContainerOutline.swift in Sources */,
 				6D48060D24A551D300DD8DDF /* ITLibraryInterface.swift in Sources */,
+				6D0DFF2024B230F60095D095 /* VibeEditView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

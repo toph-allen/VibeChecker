@@ -18,13 +18,12 @@ struct TrackRow: View {
             VStack(alignment: .leading) {
                 Text(track.title ?? "")
                     .font(.headline)
-//                    .foregroundColor(.primary)
                     .lineLimit(1)
                 
                 Text(track.artistName ?? "")
-                    .font(.subheadline)
+                    .font(.caption)
                     .lineLimit(1)
-                    .foregroundColor(.secondary)
+                    .opacity(0.5)
             }
         }
             .padding(.vertical, 2)
