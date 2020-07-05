@@ -10,7 +10,7 @@ import SwiftUI
 struct TrackDetail: View {
     @Environment(\.managedObjectContext) var moc
 
-    @State var track: Track
+    @ObservedObject var track: Track
     @State var presentingVibePopover: Bool = false
     
     var body: some View {
@@ -40,6 +40,10 @@ struct TrackDetail: View {
                         .padding()
                 })
             }
+            
+            Divider()
+            
+            VibeEditView(track: track)
             
             Spacer()
         }
