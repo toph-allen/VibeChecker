@@ -37,14 +37,19 @@ struct VibeEditView: View {
                 VStack(alignment: .leading, spacing: 0) {
                     OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { item in
                         switch item {
+                        
+                        /// If this is a vibe, we check to see if there's any text in the filter field.
+                        /// If there *is*, we hide any rows that don't match it by returning an EmptyView. Otherwise, we show a VibeEditRow, which contains all the logic for tapping and stuff.
                         case let vibe as Vibe:
                             if filterString.count > 0 && !(item.name?.lowercased().contains(filterString.lowercased()) ?? true) {
                                     EmptyView()
+                                        .frame(maxWidth: .infinity)
                                 } else {
                                     HStack {
                                         VibeEditRow(track: track, vibe: vibe)
                                         Spacer()
                                     }
+                                        .frame(maxWidth: .infinity)
                                 }
 
 
@@ -58,8 +63,10 @@ struct VibeEditView: View {
                                     .padding(.vertical, 0)
                                 Spacer()
                             }
+                                .frame(maxWidth: .infinity)
                         default:
                             EmptyView()
+                                .frame(maxWidth: .infinity)
                         }
                     }
                 }

@@ -20,8 +20,8 @@ struct TrackDetail: View {
         
             HStack(alignment: .bottom) {
                 HStack(alignment: .top) {
-                    Text("Vibes")
-                        .font(.headline)
+                    Text("Vibes:")
+//                        .font(.headline)
                         .padding(.top, 2)
                     
                     TagCloudView(tags: track.vibes?.allObjects.map({($0 as! Vibe).name}) as! [String])
