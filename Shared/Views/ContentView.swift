@@ -30,13 +30,9 @@ struct ContentView: View {
                     case let vibe as Vibe:
                         VibeDetail(vibe: vibe)
                     case let playlist as Playlist:
-                        List(selection: $selectedTrack) {
-                            ForEach(playlist.playlistTracks?.allObjects.map({($0 as! PlaylistTrack).track}) as! [Track]) { track in
-                                TrackRow(track).tag(track)
-                            }
-                        }
+                        PlaylistDetail(playlist: playlist)
                     default:
-                        Text("No Vibe Selected")
+                        Text("No Vibe or Playlist Selected")
                             .font(.title)
                             .fontWeight(.light)
                             .foregroundColor(.tertiaryLabel)

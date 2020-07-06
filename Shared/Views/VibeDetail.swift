@@ -25,7 +25,7 @@ struct VibeDetail: View {
                     TrackDetail(track: selectedTrack!)
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
-                    Text("No Vibe Selected")
+                    Text("No Track Selected")
                         .font(.title)
                         .fontWeight(.light)
                         .foregroundColor(.tertiaryLabel)
@@ -34,7 +34,6 @@ struct VibeDetail: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-
     }
 }
 

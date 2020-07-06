@@ -16,7 +16,7 @@ struct TrackDetail: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 2) {
             Text(track.title ?? "")
-                .font(.title2)
+                .font(.title)
         
             HStack(alignment: .bottom) {
                 HStack(alignment: .top) {
@@ -38,12 +38,14 @@ struct TrackDetail: View {
                     VibeEditView(track: track)
                         .environment(\.managedObjectContext, self.moc)
                         .padding()
+                        .frame(minWidth: 256, idealWidth: 256, maxWidth: 256, minHeight: 512, idealHeight: 768, maxHeight: 1024)
+
                 })
             }
             
-            Divider()
+//            Divider()
             
-            VibeEditView(track: track)
+//            VibeEditView(track: track)
             
             Spacer()
         }

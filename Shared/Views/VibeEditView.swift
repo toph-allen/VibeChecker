@@ -13,6 +13,7 @@ struct VibeEditView: View {
 //    @FetchRequest var trackVibes: FetchedResults<Vibe>
 //    @State var trackVibes: Set<Vibe>
     @FetchRequest(entity: Container.entity(), sortDescriptors: [], predicate: NSPredicate(format: "parent == nil")) var rootContainers: FetchedResults<Container>
+    @State var filterString: String = ""
     
 //    init(track: Track) {
 //        self.track = track
@@ -25,22 +26,45 @@ struct VibeEditView: View {
 //    }
     
     var body: some View {
-        List {
-            OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { item in
-//            ForEach(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? []) { item in
-                
-                
-                switch item {
-                case let vibe as Vibe:
-                    VibeEditRow(track: track, vibe: vibe)
-                case let folder as Folder:
-                    Text(folder.name ?? "")
-                default:
-                    EmptyView()
+        // N.B. This might be better in a list if SwiftUI allows lists in popovers.
+        VStack(alignment: .leading, spacing: 0) {
+            
+            Text("Vibes")
+                .font(.title2)
+            TextField("Filter Vibes", text: $filterString)
+
+            ScrollView {
+                VStack(alignment: .leading, spacing: 0) {
+                    OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { item in
+                        switch item {
+                        case let vibe as Vibe:
+                            if filterString.count > 0 && !(item.name?.lowercased().contains(filterString.lowercased()) ?? true) {
+                                    EmptyView()
+                                } else {
+                                    HStack {
+                                        VibeEditRow(track: track, vibe: vibe)
+                                        Spacer()
+                                    }
+                                }
+
+
+                        case let folder as Folder:
+                            HStack {
+                                Text(folder.name ?? "")
+                                    .fontWeight(.bold)
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                                    .padding(.horizontal, 3)
+                                    .padding(.vertical, 0)
+                                Spacer()
+                            }
+                        default:
+                            EmptyView()
+                        }
+                    }
                 }
             }
         }
-//        .listStyle(SidebarListStyle())
     }
 }
 
@@ -54,15 +78,26 @@ struct VibeEditRow: View {
     var body: some View {
         if (vibe.tracks?.contains(track)) ?? false {
             Text(vibe.name ?? "")
-                .background(Color.accentColor)
                 .foregroundColor(.white)
+                .lineLimit(1)
+                .truncationMode(.middle)
+                .padding(.horizontal, 3)
+                .padding(.vertical, 1)
+                .background(Color.accentColor)
+                .cornerRadius(5.0)
                 .onTapGesture {
                     vibe.removeFromTracks(track)
                     try! moc.save()
                 }
         } else {
             Text(vibe.name ?? "")
+                .lineLimit(1)
+                .truncationMode(.middle)
+                .padding(.horizontal, 3)
+                .padding(.vertical, 1)
+                .cornerRadius(5.0)
                 .onTapGesture {
+                    vibe.addToTracks(track)
                     try! moc.save()
                 }
         }

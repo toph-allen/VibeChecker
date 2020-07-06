@@ -13,7 +13,7 @@ struct PlaylistDetail: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            Divider().padding(0)
+            Divider()
             NavigationView {
                 List(selection: $selectedTrack) {
                     ForEach(playlist.playlistTracks?.allObjects.map({($0 as! PlaylistTrack).track}) as! [Track]) { track in
@@ -21,15 +21,19 @@ struct PlaylistDetail: View {
                     }
                 }
                 if selectedTrack != nil {
-                    TagCloudView(tags: selectedTrack!.vibes?.allObjects.map({($0 as! Vibe).name}) as! [String])
-                        .background(Color.windowBackground)
-                        .cornerRadius(5)
+                    // This is actually a track detail view or an inspector
+                    TrackDetail(track: selectedTrack!)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 } else {
                     Text("No Track Selected")
+                        .font(.title)
+                        .fontWeight(.light)
+                        .foregroundColor(.tertiaryLabel)
+                        .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
         }
-
     }
 }
 
