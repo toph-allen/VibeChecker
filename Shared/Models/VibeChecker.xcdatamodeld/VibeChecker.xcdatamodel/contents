@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17162" systemVersion="20A4299v" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Album" representedClassName="Album" syncable="YES" codeGenerationType="class">
+        <attribute name="artwork" optional="YES" attributeType="Binary"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="year" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="artist" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Artist" inverseName="albums" inverseEntity="Artist"/>
@@ -57,7 +58,7 @@
         <relationship name="tracks" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Track" inverseName="vibes" inverseEntity="Track"/>
     </entity>
     <elements>
-        <element name="Album" positionX="-150.3046875" positionY="-471.14453125" width="128" height="89"/>
+        <element name="Album" positionX="-150.3046875" positionY="-471.14453125" width="128" height="104"/>
         <element name="Artist" positionX="-328.8125" positionY="-380.34375" width="128" height="74"/>
         <element name="Container" positionX="-456.46484375" positionY="-178.390625" width="128" height="89"/>
         <element name="Folder" positionX="-243" positionY="-306" width="128" height="44"/>

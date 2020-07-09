@@ -38,13 +38,15 @@ struct Sidebar: View {
                 
                 Section(header: Text("Vibes")) {
                     OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { item in
-                        ContainerRow(item).tag(item)
+                        ContainerRow(item)
+                            .tag(item)
                     }
                 }
                 
                 Section(header: Text("Playlists")) {
                     OutlineGroup(rootContainers.filter({$0.inVibeTree == false}), children: \.childArray) { item in
-                        ContainerRow(item).tag(item)
+                        ContainerRow(item)
+                            .tag(item)
                     }
                 }
             }

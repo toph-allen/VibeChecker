@@ -29,15 +29,30 @@ struct VibeEditView: View {
         // N.B. This might be better in a list if SwiftUI allows lists in popovers.
         VStack(alignment: .leading, spacing: 0) {
             
-            Text("Vibes")
-                .font(.title2)
+            Text("Assign vibes to \"\(track.title ?? "")\"")
+                .font(.callout)
             TextField("Filter Vibes", text: $filterString)
+                .padding(.vertical, 5)
 
             ScrollView {
                 VStack(alignment: .leading, spacing: 0) {
                     ForEach(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? []) { item in
                         VibeEditRow2(item: item, track: track, filterString: filterString)
                     }
+                }
+            }
+                   
+            
+            
+            /// This one uses a List, but it's still janky.
+//            List {
+//                OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { item in
+//                    VibeEditRow(item: item, track: track, filterString: filterString)
+//                    }
+//                }
+//            .listStyle(SidebarListStyle())
+//            .background(Color.white.opacity(0.0))
+            
                     
                     
                     
@@ -76,8 +91,8 @@ struct VibeEditView: View {
 //                                .frame(maxWidth: .infinity)
 //                        }
 //                    }
-                }
-            }
+//                }
+//            }
         }
     }
 }
@@ -112,7 +127,8 @@ struct VibeEditRow2: View {
         switch item {
         case let folder as Folder:
             VibeEditRowBase(item: folder)
-                .font(.headline)
+                .font(.caption2)
+                .foregroundColor(.secondary)
             VStack(alignment: .leading, spacing: 0) {
                 ForEach(folder.childArray ?? []) { item in
                     VibeEditRow2(item: item, track: track, filterString: filterString)
@@ -126,14 +142,16 @@ struct VibeEditRow2: View {
                 if (vibe.tracks?.contains(track)) ?? false {
                     VibeEditRowBase(item: vibe)
                         .foregroundColor(Color.white)
-                        .background(Color.accentColor)
+                        .background(Color.accentColor.opacity(0.85))
                         .cornerRadius(5.0)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             vibe.removeFromTracks(track)
                             try! moc.save()
                         }
                 } else {
                     VibeEditRowBase(item: vibe)
+                        .contentShape(Rectangle())
                         .onTapGesture {
                             vibe.addToTracks(track)
                             try! moc.save()
@@ -149,37 +167,40 @@ struct VibeEditRow2: View {
 
 struct VibeEditRow: View {
     @Environment(\.managedObjectContext) var moc
+    @ObservedObject var item: Container
     @ObservedObject var track: Track
-    @ObservedObject var vibe: Vibe
+    var filterString: String
 
     @ViewBuilder
     var body: some View {
-        if (vibe.tracks?.contains(track)) ?? false {
-            Text(vibe.name ?? "")
-                .foregroundColor(.white)
-                .lineLimit(1)
-                .truncationMode(.middle)
-                .padding(.horizontal, 3)
-                .padding(.vertical, 1)
-                .background(Color.accentColor)
-                .cornerRadius(5.0)
-                .onTapGesture {
-                    vibe.removeFromTracks(track)
-                    try! moc.save()
+        switch item {
+        case let folder as Folder:
+            VibeEditRowBase(item: folder)
+//                .font(.caption)
+        case let vibe as Vibe:
+            if filterString.count > 0 && !(item.name?.lowercased().contains(filterString.lowercased()) ?? true) {
+                    EmptyView()
+            } else {
+                if (vibe.tracks?.contains(track)) ?? false {
+                    VibeEditRowBase(item: vibe)
+                        .foregroundColor(Color.white)
+                        .background(Color.accentColor)
+//                        .cornerRadius(5.0)
+                        .onTapGesture {
+                            vibe.removeFromTracks(track)
+                            try! moc.save()
+                        }
+                } else {
+                    VibeEditRowBase(item: vibe)
+                        .onTapGesture {
+                            vibe.addToTracks(track)
+                            try! moc.save()
+                        }
                 }
-        } else {
-            Text(vibe.name ?? "")
-                .lineLimit(1)
-                .truncationMode(.middle)
-                .padding(.horizontal, 3)
-                .padding(.vertical, 1)
-                .cornerRadius(5.0)
-                .onTapGesture {
-                    vibe.addToTracks(track)
-                    try! moc.save()
-                }
+            }
+        default:
+            EmptyView()
         }
-        
     }
 }
 
