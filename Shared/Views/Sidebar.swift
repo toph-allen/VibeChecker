@@ -24,11 +24,11 @@ func imageName(for container: Container.Type) -> String {
 
 struct Sidebar: View {
     var rootContainers: FetchedResults<Container>
-    @Binding var selectedContainer: Container?
+//    @Binding var selectedContainer: Container?
     
     var body: some View {
 
-            List(selection: $selectedContainer) {
+            List {
                 NavigationLink(destination: LibraryView()) {
                     Label("Library", systemImage: "books.vertical.fill")
                 }
@@ -38,20 +38,37 @@ struct Sidebar: View {
                 
                 Section(header: Text("Vibes")) {
                     OutlineGroup(rootContainers.filter({$0.inVibeTree == true}).first?.childArray ?? [], children: \.childArray) { item in
-                        ContainerRow(item)
-                            .tag(item)
+                        switch item {
+                        case let vibe as Vibe:
+                            NavigationLink(destination: VibeDetail(vibe: vibe)) {
+                                ContainerRow(vibe)
+                            }
+                        default:
+                            ContainerRow(item)
+                        }
+//                        ContainerRow(item)
+//                            .tag(item)
                     }
                 }
                 
                 Section(header: Text("Playlists")) {
                     OutlineGroup(rootContainers.filter({$0.inVibeTree == false}), children: \.childArray) { item in
-                        ContainerRow(item)
-                            .tag(item)
+                        switch item {
+                        case let playlist as Playlist:
+                            NavigationLink(destination: PlaylistDetail(playlist: playlist)) {
+                                ContainerRow(playlist)
+                            }
+                        default:
+                            ContainerRow(item)
+                        }
+
+//                        ContainerRow(item)
+//                            .tag(item)
                     }
                 }
             }
             .listStyle(SidebarListStyle())
-            .navigationTitle(selectedContainer != nil ? Text(selectedContainer!.name ?? "") : Text("VibeChecker"))
+//            .navigationTitle(selectedContainer != nil ? Text(selectedContainer!.name ?? "") : Text("VibeChecker"))
     }
 }
 

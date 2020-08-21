@@ -129,7 +129,7 @@ struct VibeEditRow2: View {
             VibeEditRowBase(item: folder)
                 .font(.caption2)
                 .foregroundColor(.secondary)
-            VStack(alignment: .leading, spacing: 0) {
+            LazyVStack(alignment: .leading, spacing: 0) {
                 ForEach(folder.childArray ?? []) { item in
                     VibeEditRow2(item: item, track: track, filterString: filterString)
                         .padding(.leading, 10)
@@ -184,7 +184,7 @@ struct VibeEditRow: View {
                 if (vibe.tracks?.contains(track)) ?? false {
                     VibeEditRowBase(item: vibe)
                         .foregroundColor(Color.white)
-                        .background(Color.accentColor)
+                        .background(Color("SelectionColor"))
 //                        .cornerRadius(5.0)
                         .onTapGesture {
                             vibe.removeFromTracks(track)

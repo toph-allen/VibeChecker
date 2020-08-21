@@ -15,7 +15,7 @@ struct ContentView: View {
 
     @FetchRequest(entity: Container.entity(), sortDescriptors: [], predicate: NSPredicate(format: "parent == nil")) var rootContainers: FetchedResults<Container>
 
-    @State private var selectedContainer: Container? = nil
+//    @State private var selectedContainer: Container? = nil
     @State private var selectedTrack: Track? = nil
     @State private var presentingImportView = false
 
@@ -24,20 +24,20 @@ struct ContentView: View {
         Group {
             if presentingImportView == false {
                 NavigationView {
-                    Sidebar(rootContainers: rootContainers, selectedContainer: $selectedContainer)
+                    Sidebar(rootContainers: rootContainers)
                     
-                    switch selectedContainer {
-                    case let vibe as Vibe:
-                        VibeDetail(vibe: vibe)
-                    case let playlist as Playlist:
-                        PlaylistDetail(playlist: playlist)
-                    default:
-                        Text("No Vibe or Playlist Selected")
-                            .font(.title)
-                            .fontWeight(.light)
-                            .foregroundColor(.tertiaryLabel)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    }
+//                    switch selectedContainer {
+//                    case let vibe as Vibe:
+//                        VibeDetail(vibe: vibe)
+//                    case let playlist as Playlist:
+//                        PlaylistDetail(playlist: playlist)
+//                    default:
+//                        Text("No Vibe or Playlist Selected")
+//                            .font(.title)
+//                            .fontWeight(.light)
+//                            .foregroundColor(.tertiaryLabel)
+//                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+//                    }
                 }
             } else {
                 EmptyView()

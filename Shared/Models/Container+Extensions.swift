@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-extension Container: Identifiable {
+extension Container {
     @objc var childArray: [Container]? {
         get {
             return nil

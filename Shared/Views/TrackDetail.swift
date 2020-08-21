@@ -36,7 +36,6 @@ struct TrackDetail: View {
                 .foregroundColor(.secondary)
                 .popover(isPresented: $presentingVibePopover, content: {
                     VibeEditView(track: track)
-                        .environment(\.managedObjectContext, self.moc)
                         .padding()
                         .frame(minWidth: 256, idealWidth: 256, maxWidth: 256, minHeight: 512, idealHeight: 768, maxHeight: 1024)
 

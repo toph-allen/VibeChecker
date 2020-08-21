@@ -12,6 +12,7 @@ import SwiftUI
 public extension Color {
     static let text = Color(NSColor.textColor)
     static let placeholderText = Color(NSColor.placeholderTextColor)
+    static let textBackground = Color(NSColor.textBackgroundColor)
     
     static let label = Color(NSColor.labelColor)
     static let secondaryLabel = Color(NSColor.secondaryLabelColor)

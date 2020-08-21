@@ -260,6 +260,7 @@
 			children = (
 				6D562FBB24AD1015006943D3 /* EnvironmentKeys.swift */,
 				6D5F46CB24A54E3700411F2D /* ContentView.swift */,
+				6DAF3AD024AB943700E27DCE /* ImportView.swift */,
 				6D4E01C024ACDFE0008D368B /* Sidebar.swift */,
 				6D324C3F24AE89B800BA13EF /* LibraryView.swift */,
 				6D4E01C624ACE41A008D368B /* ContainerRow.swift */,
@@ -270,7 +271,6 @@
 				6DC3992124AD167E00A235B5 /* TrackRow.swift */,
 				6D0DFF1B24B22D9B0095D095 /* TrackDetail.swift */,
 				6D0DFF1E24B2303B0095D095 /* VibeEditView.swift */,
-				6DAF3AD024AB943700E27DCE /* ImportView.swift */,
 				6D85D68724A59BD20085E1C3 /* ContainerOutline.swift */,
 				6D324C3C24AE88AC00BA13EF /* PlaceholderView.swift */,
 			);
@@ -696,7 +696,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.16;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.toph.VibeChecker;
 				PRODUCT_NAME = VibeChecker;
 				SDKROOT = macosx;
@@ -720,7 +720,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.16;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_BUNDLE_IDENTIFIER = io.toph.VibeChecker;
 				PRODUCT_NAME = VibeChecker;
 				SDKROOT = macosx;

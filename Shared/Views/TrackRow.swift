@@ -9,8 +9,13 @@ import SwiftUI
 
 struct TrackRow: View {
     let track: Track
+    
     init(_ track: Track) {
         self.track = track
+    }
+    
+    init(_ playlistTrack: PlaylistTrack) {
+        self.track = playlistTrack.track!
     }
     
     var body: some View {
